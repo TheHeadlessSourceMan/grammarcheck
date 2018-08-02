@@ -1,0 +1,7 @@
+*.pyc
+/Third Crown.msk
+/plugins/AtdGrammarcheck/atd
+/build
+/dist
+/grammarcheck.egg-info
+/autoauth.lnk
