@@ -11,13 +11,12 @@ A simple, pluggable, python spelling/grammar checker.  Works automatically with 
 
 Rant:
 -----
-    The grammar checker tools out there are surprisingly bad.  They give a lot of false-positives based on technical rules ("I am.", answered Bob.) and yet still don't clean up crappy writing. (The tree was big.  The tree was good.  It was a big, good, tree.) 
+The grammar checker tools out there are surprisingly bad.  They give a lot of false-positives based on technical rules ("I am.", answered Bob.) and yet still don't clean up crappy writing. (The tree was big.  The tree was good.  It was a big, good, tree.) 
 
 
 Status:
 -------
-	Many of the individual tools work, but I really need a smart grammar parser like "bllip"
-	to proceed.
+Many of the individual tools work, but I really need a smart grammar parser like "bllip" to proceed.
 	
 TODO:
 -----
