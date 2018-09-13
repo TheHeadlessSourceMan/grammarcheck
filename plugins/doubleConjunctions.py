@@ -43,11 +43,17 @@ class BadConjFinder(SentenceChecker):
 		"""
 		takes a plain text document
 		
-		returns [(startIndex,endIndex,problem)]
+		returns [DocProblem]
 		"""
 		ret=[]
-		for match in self.REGEX.finditer(str(doc)):
-			ret.append((match.start(1),match.end(1),str(match.group(1))))
+		for match in self.REGEX.finditer(doc):
+				dp=DocProblem(
+					atWord=None,severity=0.85,certainty=0.9,
+					start_idx=match.start(1),end_idx=match.end(1),
+					name='double conjections',replacements=[],fromChecker=self,
+					description='Double conjunctions such as "of of" or "a an" which is a surprisingly common typo error',
+					doc=doc)
+				ret.append(dp)
 		return ret
 		
 		

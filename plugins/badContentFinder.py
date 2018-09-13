@@ -1,10 +1,10 @@
 #!/usr/bin/env
 # -*- coding: utf-8 -*-
 """
-This program will find bad content including minced oaths and derogitory terms.
+This program will find bad content including minced oaths and derogatory terms.
 
 This is to be run after a general language filter.  That is, it will not catch f-bombs or whatever.
-It assumes you have generally decent language, but might occasinally have let an "crap" or something
+It assumes you have generally decent language, but might occasionally have let an "crap" or something
 slip by.
 """
 from docStructure import re
@@ -24,7 +24,13 @@ MINCED_OATHS=['omg','crap','darn','dang','dag nabbit','dad gum','gosh','crimany'
 RUDENESS=['jerk','yuppie','stupid','idiot','moron','loser','dummy','dumb','poop','snot','fart','shut up','butt','bum','puke','barf','poo']
 
 class BadContentFinder(SentenceChecker):
-	
+	"""
+	This program will find bad content including minced oaths and derogatory terms.
+
+	This is to be run after a general language filter.  That is, it will not catch f-bombs or whatever.
+	It assumes you have generally decent language, but might occasionally have let an "crap" or something
+	slip by.
+	"""
 	BAD_REGEX=None
 	BAD_RUDE_REGEX=None
 	
@@ -58,7 +64,11 @@ class BadContentFinder(SentenceChecker):
 		else:
 			regex=self.BAD_REGEX
 		for match in regex.finditer(str(doc)):
-			ret.append((match.start(1),match.end(1),str(match.group(1))))
+			dp=DocProblem(description='bad language',
+				atWord=None,severity=0.85,certainty=0.9,
+				start_idx=match.start(1),end_idx=match.end(1),
+				name='',replacements=[],fromChecker=self,doc='Bad words and phrases including softcore-cursing and general rudeness.  Usually the fix is to remove if completely unnecessary.  If it does have a purpose, then better to say something less lazy and more detailed anyway.  "Holy Crap!" => "Wow!  That\'s the worst scar I\'ve ever seen!"')
+			ret.append(dp)
 		return ret
 		
 		

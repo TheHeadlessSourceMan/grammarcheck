@@ -24,6 +24,7 @@ class WasBuster(SentenceChecker):
 			regex=r"""((there\s+(is|was|will\s+be)\s+)([^\."!?]+?)(\s+(who|that|which)))(.*)"""
 			self.regex=re.compile(regex,re.IGNORECASE|re.DOTALL)
 			regex2=r"""(is|am|was|will\s+be)\s+([a-z]+?)(ing\s+)"""
+			self.regex2=re.compile(regex2,re.IGNORECASE|re.DOTALL)
 
 	def checkSentence(self,sentence):
 		"""

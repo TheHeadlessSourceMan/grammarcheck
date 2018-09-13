@@ -5,6 +5,8 @@ This program will find abbreviations without proper periods
 """
 from grammarcheck import *
 from docStructure import *
+from DocProblem import *
+
 
 ABBR=['abbr',
 	#'N.','S.','E.','W.',
@@ -18,7 +20,11 @@ ABBR=['abbr',
 	'etc.','i.e.','e.g.','et al.',
 ]
 
+
 class AbbreviationFinder(DocumentChecker):
+	"""
+	Find abbreviations that are not formatted correctly.
+	"""
 	
 	REGEX=None
 	
@@ -38,14 +44,17 @@ class AbbreviationFinder(DocumentChecker):
 
 	def checkSentence(self,doc):
 		"""
-		takes a plain text document
-		
-		returns [(startIndex,endIndex,problem)]
+		:param doc: the document object to check for errors
+		:return: [DocProblem]
 		"""
 		ret=[]
-		for match in self.REGEX.finditer(doc):
+		for match in self.REGEX.finditer(doc.text):
 			if match.group(1) not in ABBR: # if its not exactly how it should be
-				ret.append((match.start(1),match.end(1),str(match.group(1))))
+				dp=DocProblem(description='abbreviation not formatted correctly',
+					atWord=None,severity=0.85,certainty=0.9,
+					start_idx=match.start(1),end_idx=match.end(1),
+					name='',replacements=[],fromChecker=self,doc=doc)
+				ret.append(dp)
 		return ret
 	
 

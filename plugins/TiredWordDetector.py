@@ -1,7 +1,14 @@
+"""
+Check sentences for overused words.
+"""
 import os
 from grammarcheck import *
 
+
 class TiredWordDetector(SentenceChecker):
+	"""
+	Check sentences for overused words.
+	"""
 	overusedWordList=None
 
 	def __init__(self,filename=None):
@@ -24,9 +31,14 @@ class TiredWordDetector(SentenceChecker):
 			self.overusedWordList=fixedWordList
 		
 	def checkSentence(self,sentence):
-		DocProblems=[]
+		"""
+		check a sentence for overused words
+		
+		returns [DocProblem]
+		"""
+		docProblems=[]
 		for word in sentence.words:
 			root=word.getRoot()
 			if root in self.overusedWordList.keys():
-				DocProblems.append(DocProblem(self.overusedWordList[root],word,self.DocProblemRank))
-		return DocProblems
+				docProblems.append(DocProblem(self.overusedWordList[root],word,self.DocProblemRank))
+		return docProblems

@@ -1,7 +1,7 @@
 #!/usr/bin/env
 # -*- coding: utf-8 -*-
 """
-Had is a weak word, and a good indication of telling
+Had is a weak word, and a good indication of telling not showing
 """
 from grammarcheck import *
 from docStructure import re
@@ -11,7 +11,7 @@ had_alternatives=['accommodate','accumulate','acquire','adopt','appropriate','as
 
 class HadBlaster(SentenceChecker):
 	"""
-	Had is a weak word, and a good indication of telling
+	Had is a weak word, and a good indication of telling not showing
 	"""
 	
 	def __init__(self):
@@ -19,6 +19,7 @@ class HadBlaster(SentenceChecker):
 
 	def checkSentence(self,sentence):
 		"""
+		returns [DocProblem]
 		"""
 		ret=[]
 		had=sentence.findword('had')

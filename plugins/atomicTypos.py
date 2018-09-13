@@ -92,14 +92,19 @@ class AtomicTypos(SentenceChecker):
 		results=[]
 		outOf=len(doc.words)
 		badWords=0
+		return results # TODO TODO TODO this class is really slow for some reason
 		for w in doc.words:
 			wordWasBad=False
-			sw=str(w)
 			for c in self._CHECKS:
-				badness=c.check(sw)
+				badness=c.check(w)
 				if badness>0:
-					description=self.name+': '+sw+' could also be ['+(','.join(str(c).split('\n')))+']'
-					results.append(DocProblem(description,w,badness))
+					alternatives=str(c).split('\n')
+					doc=self.name+': '+str(w)+' could also be ['+(','.join(alternatives))+']'
+					dp=DocProblem(description='atomic typo, that is, a typo that might pass a spellcheck, but as the incorrect word entirely',
+						atWord=w,severity=badness,certainty=0.9,
+						start_idx=w.start,end_idx=w.end,
+						name='',replacements=alternatives,fromChecker=self,doc=doc)
+					results.append(dp)
 					wordWasBad=True
 			if wordWasBad:
 				badWords+=1
